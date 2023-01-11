@@ -172,7 +172,33 @@ pascal_sbd_dataset = dataset_base.copy({
     'class_names': PASCAL_CLASSES,
 })
 
+aihub_seg_dataset = dataset_base.copy({
+    'name': 'AiHub Segmentaion',
+    'train_images':  '/content/drive/MyDrive/YolactDataset/train',
+    'valid_images':  '/content/drive/MyDrive/YolactDataset/train',
 
+    'train_info':   '/content/drive/MyDrive/YolactDataset/train/coco.json',
+    'valid_info':   '/content/drive/MyDrive/YolactDataset/train/coco.json',
+
+    'class_names': ('barricade',
+                    'chair',
+                    'bycycle',
+                    'bollard',
+                    'bus',
+                    'car',
+                    'kiosk',
+                    'motorcycle',
+                    'movable_signage',
+                    'person',
+                    'pole',
+                    'potted_plant',
+                    'stop',
+                    'traffic_light',
+                    'traffic_light_controller',
+                    'tree_trunk',
+                    'truck'
+                  )
+})
 
 
 
