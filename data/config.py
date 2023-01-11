@@ -172,46 +172,48 @@ pascal_sbd_dataset = dataset_base.copy({
     'class_names': PASCAL_CLASSES,
 })
 
+# 라벨 병합 안한거
+# aihub_seg_dataset = dataset_base.copy({
+#     'name': 'AiHub Segmentaion',
+#     'train_images':  '/content/Seg/Polygon_0001',
+#     'valid_images':  '/content/Seg/Polygon_0001',
+
+#     'train_info':   '/content/coco.json',
+#     'valid_info':   '/content/coco.json',
+
+#     'class_names': ('pole',
+#                     'person',
+#                     'movable_signage',
+#                     'chair',
+#                     'motorcycle',
+#                     'potted_plant',
+#                     'tree_trunk',
+#                     'car',
+#                     'bicycle',
+#                     'bollard',
+#                     'truck',
+#                     'carrier',
+#                     'barricade',
+#                     'stroller',
+#                     'fire_hydrant',
+#                     'table',
+#                     'traffic_sign',
+#                     'traffic_light',
+#                     'traffic_light_controller',
+#                     'kiosk',
+#                     'scooter',
+#                     'bus'
+#                   )
+# })
+
 aihub_seg_dataset = dataset_base.copy({
     'name': 'AiHub Segmentaion',
-    'train_images':  '/content/Seg/Polygon_0001',
-    'valid_images':  '/content/Seg/Polygon_0001',
 
-    'train_info':   '/content/coco.json',
-    'valid_info':   '/content/coco.json',
+    'train_images':  './train',
+    'valid_images':  './train',
 
-    'class_names': ('pole',
-                    'person',
-                    'movable_signage',
-                    'chair',
-                    'motorcycle',
-                    'potted_plant',
-                    'tree_trunk',
-                    'car',
-                    'bicycle',
-                    'bollard',
-                    'truck',
-                    'carrier',
-                    'barricade',
-                    'stroller',
-                    'fire_hydrant',
-                    'table',
-                    'traffic_sign',
-                    'traffic_light',
-                    'traffic_light_controller',
-                    'kiosk',
-                    'scooter',
-                    'bus'
-                  )
-})
-
-aihub_seg2_dataset = dataset_base.copy({
-    'name': 'AiHub Segmentaion',
-    'train_images':  '/content/drive/MyDrive/YolactDataset/train',
-    'valid_images':  '/content/drive/MyDrive/YolactDataset/train',
-
-    'train_info':   '/content/drive/MyDrive/YolactDataset/train/coco.json',
-    'valid_info':   '/content/drive/MyDrive/YolactDataset/train/coco.json',
+    'train_info':   './train/coco.json',
+    'valid_info':   './train/coco.json',
 
     'class_names': ('barricade',
                     'chair',
@@ -232,6 +234,7 @@ aihub_seg2_dataset = dataset_base.copy({
                     'truck'
                   )
 })
+
 
 
 # ----------------------- TRANSFORMS ----------------------- #
