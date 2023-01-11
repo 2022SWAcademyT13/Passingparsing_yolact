@@ -22,7 +22,8 @@ from utils.functions import MovingAverage, make_net
 torch.cuda.current_device()
 
 # As of March 10, 2019, Pytorch DataParallel still doesn't support JIT Script Modules
-use_jit = torch.cuda.device_count() <= 1
+# use_jit = torch.cuda.device_count() <= 1
+use_jit = False
 if not use_jit:
     print('Multiple GPUs detected! Turning off JIT.')
 
@@ -245,7 +246,8 @@ class PredictionModule(nn.Module):
 
                                 prior_data += [x, y, w, h]
 
-                self.priors = torch.Tensor(prior_data, device=device).view(-1, 4).detach()
+                # self.priors = torch.Tensor(prior_data, dtype=torch.float32, device=device).view(-1, 4).detach() #<<< 내가 수정함
+                self.priors = torch.FloatTensor(prior_data).view(-1, 4).detach() #<<< 내가 수정함
                 self.priors.requires_grad = False
                 self.last_img_size = (cfg._tmp_img_w, cfg._tmp_img_h)
                 self.last_conv_size = (conv_w, conv_h)
@@ -324,12 +326,14 @@ class FPN(ScriptModuleWrapper):
         # For backward compatability, the conv layers are stored in reverse but the input and output is
         # given in the correct order. Thus, use j=-i-1 for the input and output and i for the conv layers.
         j = len(convouts)
+        sizes = [(69,69),(35,35)]
         for lat_layer in self.lat_layers:
             j -= 1
 
             if j < len(convouts) - 1:
-                _, _, h, w = convouts[j].size()
-                x = F.interpolate(x, size=(h, w), mode=self.interpolation_mode, align_corners=False)
+                #_, _, h, w = convouts[j].size()
+                #x = F.interpolate(x, size=(h, w), mode=self.interpolation_mode, align_corners=False)
+                x = F.interpolate(x, size=sizes[j], mode=self.interpolation_mode, align_corners=False)
             
             x = x + lat_layer(convouts[j])
             out[j] = x
@@ -677,7 +681,8 @@ class Yolact(nn.Module):
                 else:
                     pred_outs['conf'] = F.softmax(pred_outs['conf'], -1)
 
-            return self.detect(pred_outs, self)
+            # return self.detect(pred_outs, self)
+            return pred_outs['loc'], pred_outs['conf'], pred_outs['mask'], pred_outs['priors'], pred_outs['proto']
 
 
 

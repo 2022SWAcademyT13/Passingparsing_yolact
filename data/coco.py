@@ -115,7 +115,7 @@ class COCODetection(data.Dataset):
             target = [x for x in self.coco.loadAnns(ann_ids) if x['image_id'] == img_id]
         else:
             target = []
-
+        
         # Separate out crowd annotations. These are annotations that signify a large crowd of
         # objects of said class, where there is no annotation for each individual object. Both
         # during testing and training, consider these crowds as neutral.
@@ -127,7 +127,8 @@ class COCODetection(data.Dataset):
             x['category_id'] = -1
 
         # This is so we ensure that all crowd annotations are at the end of the array
-        target += crowd
+        # target += crowd
+        target = target + crowd
         
         # The split here is to have compatibility with both COCO2014 and 2017 annotations.
         # In 2014, images have the pattern COCO_{train/val}2014_%012d.jpg, while in 2017 it's %012d.jpg.
@@ -169,9 +170,10 @@ class COCODetection(data.Dataset):
                 masks = None
                 target = None
 
-        if target.shape[0] == 0:
-            print('Warning: Augmentation output an example with no ground truth. Resampling...')
-            return self.pull_item(random.randint(0, len(self.ids)-1))
+        if target is not None:
+            if target.shape[0] == 0:
+                print('Warning: Augmentation output an example with no ground truth. Resampling...')
+                return self.pull_item(random.randint(0, len(self.ids)-1))
 
         return torch.from_numpy(img).permute(2, 0, 1), target, masks, height, width, num_crowds
 

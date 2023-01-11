@@ -172,8 +172,66 @@ pascal_sbd_dataset = dataset_base.copy({
     'class_names': PASCAL_CLASSES,
 })
 
+aihub_seg_dataset = dataset_base.copy({
+    'name': 'AiHub Segmentaion',
+    'train_images':  '/content/Seg/Polygon_0001',
+    'valid_images':  '/content/Seg/Polygon_0001',
 
+    'train_info':   '/content/coco.json',
+    'valid_info':   '/content/coco.json',
 
+    'class_names': ('pole',
+                    'person',
+                    'movable_signage',
+                    'chair',
+                    'motorcycle',
+                    'potted_plant',
+                    'tree_trunk',
+                    'car',
+                    'bicycle',
+                    'bollard',
+                    'truck',
+                    'carrier',
+                    'barricade',
+                    'stroller',
+                    'fire_hydrant',
+                    'table',
+                    'traffic_sign',
+                    'traffic_light',
+                    'traffic_light_controller',
+                    'kiosk',
+                    'scooter',
+                    'bus'
+                  )
+})
+
+aihub_seg2_dataset = dataset_base.copy({
+    'name': 'AiHub Segmentaion',
+    'train_images':  '/content/drive/MyDrive/YolactDataset/train',
+    'valid_images':  '/content/drive/MyDrive/YolactDataset/train',
+
+    'train_info':   '/content/drive/MyDrive/YolactDataset/train/coco.json',
+    'valid_info':   '/content/drive/MyDrive/YolactDataset/train/coco.json',
+
+    'class_names': ('barricade',
+                    'chair',
+                    'bycycle',
+                    'bollard',
+                    'bus',
+                    'car',
+                    'kiosk',
+                    'motorcycle',
+                    'movable_signage',
+                    'person',
+                    'pole',
+                    'potted_plant',
+                    'stop',
+                    'traffic_light',
+                    'traffic_light_controller',
+                    'tree_trunk',
+                    'truck'
+                  )
+})
 
 
 # ----------------------- TRANSFORMS ----------------------- #
