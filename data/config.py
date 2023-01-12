@@ -209,11 +209,11 @@ pascal_sbd_dataset = dataset_base.copy({
 aihub_seg_dataset = dataset_base.copy({
     'name': 'AiHub Segmentaion',
 
-    'train_images':  './train',
-    'valid_images':  './train',
+    'train_images':  '/Users/nara/Desktop/t3q_upload/yolact/Polygonbox1/Polygon_0001',
+    'valid_images':  '/Users/nara/Desktop/t3q_upload/yolact/Polygonbox1/Polygon_0001',
 
-    'train_info':   './train/coco.json',
-    'valid_info':   './train/coco.json',
+    'train_info':   '/Users/nara/Desktop/t3q_upload/yolact/Polygonbox1/Polygon_0001/coco.json',
+    'valid_info':   '/Users/nara/Desktop/t3q_upload/yolact/Polygonbox1/Polygon_0001/coco.json',
 
     'class_names': ('barricade',
                     'chair',
@@ -315,7 +315,7 @@ resnet101_dcn_inter3_backbone = resnet101_backbone.copy({
 
 resnet50_backbone = resnet101_backbone.copy({
     'name': 'ResNet50',
-    'path': 'resnet50-19c8e357.pth',
+    'path': 'yolact_resnet50_185_13764.pth',
     'type': ResNetBackbone,
     'args': ([3, 4, 6, 3],),
     'transform': resnet_transform,
@@ -718,8 +718,8 @@ yolact_base_config = coco_base_config.copy({
     'name': 'yolact_base',
 
     # Dataset stuff
-    'dataset': coco2017_dataset,
-    'num_classes': len(coco2017_dataset.class_names) + 1,
+    'dataset': aihub_seg_dataset,
+    'num_classes': len(aihub_seg_dataset.class_names) + 1,
 
     # Image Size
     'max_size': 550,
